@@ -13,3 +13,5 @@ This project is a command-line interface (CLI) tool built with Python for downlo
 - BeautifulSoup library (for parsing HTML)
 - Other dependencies listed in `requirements.txt`
 
+
+![image](https://github.com/Nxttyy/libgen-api-cli/assets/103582061/e97e4778-0ce4-43b3-b589-62239da6a2fc)
