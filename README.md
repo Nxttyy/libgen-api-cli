@@ -12,6 +12,4 @@ This project is a command-line interface (CLI) tool built with Python for downlo
 - Requests library (for making HTTP requests)
 - BeautifulSoup library (for parsing HTML)
 - Other dependencies listed in `requirements.txt`
-
-
-![image](https://github.com/Nxttyy/libgen-api-cli/assets/103582061/e97e4778-0ce4-43b3-b589-62239da6a2fc)
+![lib-gen-best](https://github.com/Nxttyy/libgen-api-cli/assets/103582061/b471480d-5e4c-41a6-afaf-9b515ad9d726)
