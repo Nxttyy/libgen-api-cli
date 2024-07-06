@@ -1,12 +1,10 @@
-import urllib.request
-
-import requests
 from bs4 import BeautifulSoup
 from libgen_api import LibgenSearch
-
 import os
 import time
 import threading
+import urllib.request
+import requests
 
 from tqdm import tqdm
 
@@ -14,26 +12,28 @@ from tqdm import tqdm
 def inp_to_int(inp):
     try:
         i = int(inp)
-    except:
+    except ValueError:
         i = 0
     return i
 
-
+# globals
 s = LibgenSearch()
 results = []
 my_dir = os.path.dirname(os.path.realpath(__file__))
 
-
+# progress bar may not work on other metrics than Mb, Kb
 def progress_bar(file_size, file_name):
+    exchange_rate = {"Kb":1_000, "Mb":1_000_000}
     downloading = True
     downloaded_size = 0
+    size_metric = file_size.split(" ")[1]
     file_size_mb = int(file_size.split(" ")[0])
     
     with tqdm(total=file_size_mb, unit='MB', desc=file_name) as pbar:
         while downloading:
             time.sleep(0.5)
             try:
-                downloaded_size = os.path.getsize(os.path.join(my_dir, 'Downloads', file_name)) / 1_000_000
+                downloaded_size = os.path.getsize(os.path.join(my_dir, 'Downloads', file_name)) / exchange_rate[size_metric]
             except FileNotFoundError:
                 pass
 
@@ -43,8 +43,6 @@ def progress_bar(file_size, file_name):
                 print("End", file_size_mb)
                 downloading = False
 
-
-        
 
 
 search_choice = inp_to_int(
@@ -72,7 +70,7 @@ def main():
         # publisher = result["Publisher"]
         # mirrors = [result["Mirror_1"], result["Mirror_2"]]
         print(
-            f"[*]{results.index(result)}.{title}\nBy:{author}\nSize:{size}\nFiletype:({extention}\n)"
+            f"[*]{results.index(result)}.{title}\nBy:{author}\nSize:{size}\nFiletype:({extention})\n"
         )
 
     if (results):
@@ -110,7 +108,6 @@ def main():
         
     else:
         print(f"[DONE] no books matched your query!")
-        return None
 
 
 if __name__ =="__main__":
