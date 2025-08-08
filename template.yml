@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Grant billing data access to External SaaS Platform"
+
+Resources:
+  BillingAccessRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: "BillingDataAccessRole"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: "arn:aws:iam::767397678516:root"
+            Action: "sts:AssumeRole"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/job-function/Billing"
+        - "arn:aws:iam::aws:policy/AWSBillingConductorServicePolicy" # Optional
+
+Outputs:
+  RoleARN:
+    Value: !GetAtt BillingAccessRole.Arn
